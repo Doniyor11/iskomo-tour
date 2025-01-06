@@ -90,5 +90,24 @@
         }
     });
     
+    // Функция для изменения языка
+    function changeLanguage(language) {
+        // Сохраняем выбранный язык в localStorage
+        localStorage.setItem('selectedLanguage', language);
+        
+        // Обновляем все элементы с атрибутом data-translate
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[language] && translations[language][key]) {
+                if (element.tagName === 'INPUT') {
+                    element.placeholder = translations[language][key];
+                } else {
+                    element.textContent = translations[language][key];
+                }
+            }
+        });
+    }
+
+
 })(jQuery);
 
